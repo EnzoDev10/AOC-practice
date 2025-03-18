@@ -1,4 +1,4 @@
-# 1 Historian Hysteria
+# Historian Hysteria Part One
 
 ## Contexto:
 
@@ -1040,3 +1040,24 @@ post paso uno:
 61539 20843
 
 ### Pequeños pasitos:
+
+# Historian Hysteria Part Two
+
+## Contexto
+
+Luego de reordenar las listas y obtener la distancia total entre ambas, se llego a la conclusión que las listas son muy distintas o tal vez no.
+Los historiadores proponen encontrar las similitudes entre ambas listas
+
+## Problema
+
+- Encontrar que tan similares son ambas listas.
+
+## Proceso
+
+1. Encuentra cuantas veces se repite cada número de la lista izquierda.
+2. Multiplica dicho número por la cantidad de repeticiones.
+3. Suma todos los valores para obtener un puntaje de similaridad.
+
+## Pasitos
+
+1. divide la función de la distancia total en dos, la que acomoda los slices y otra que encuentra la distancia.

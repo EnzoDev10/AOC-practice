@@ -1011,12 +1011,10 @@ var list string = `
 61539 20843
 `
 
-func TotalDistanceFinder() int {
+func listsSorter() (leftList, rightList []int) {
 
 	// Creates a slice by separating the values based on whitespaces.
 	sliceOfFields := strings.Fields(list)
-	var leftList []int
-	var rightList []int
 
 	// all left List locations have even indexes.
 	for i := range sliceOfFields {
@@ -1032,22 +1030,55 @@ func TotalDistanceFinder() int {
 	sort.Ints(leftList)
 	sort.Ints(rightList)
 
-	var distanceContainer []int
-	for i, element := range leftList {
+	return leftList, rightList
+
+}
+
+func totalDistanceValue(left, right []int) int {
+
+	var sliceOfDistances []int
+	for i, element := range left {
 		// made each substraction absolute to change negatives to positive values.
-		sub := math.Abs(float64(element) - float64(rightList[i]))
-		distanceContainer = append(distanceContainer, int(sub))
+		sub := math.Abs(float64(element) - float64(right[i]))
+		sliceOfDistances = append(sliceOfDistances, int(sub))
 	}
 
-	var distanceTotalValue int
-	for _, value := range distanceContainer {
-		distanceTotalValue += value
+	var totalValue int
+	for _, value := range sliceOfDistances {
+		totalValue += value
 	}
 
-	return distanceTotalValue
+	return totalValue
+
+}
+
+func similarityScore(left, right []int) (similarityScore int) {
+
+	var similaritySlice []int
+
+	// checks how many times a left list value exists on the right list.
+	for _, leftValue := range left {
+		var repetition = 0
+		for _, rightValue := range right {
+			if leftValue == rightValue {
+				repetition++
+			}
+		}
+		if repetition > 0 {
+			similaritySlice = append(similaritySlice, leftValue*repetition)
+		}
+	}
+
+	for _, value := range similaritySlice {
+		similarityScore += value
+	}
+
+	return
 }
 
 func main() {
-	fmt.Println(TotalDistanceFinder())
+	leftList, rightList := listsSorter()
+	fmt.Println(totalDistanceValue(leftList, rightList))
+	fmt.Println(similarityScore(leftList, rightList))
 
 }
